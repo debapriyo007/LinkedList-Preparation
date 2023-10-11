@@ -108,28 +108,29 @@ class Solution
 {
     //Function to remove a loop in the linked list.
     public static void removeLoop(Node head){
-       //Step 1 : detect a cycle.
-       Node slow = head;
-       Node fast = head;
-       Node prev = null;
-       while(fast!=null && fast.next!= null){
-           prev = slow;
-           slow = slow.next;
-           fast = fast.next.next;
-           if(slow == fast){
-               break;
-           }
-       }
-       //Step 2 : Finding the meeting point.
-       if(slow!=fast)
-         return;
-       slow = head;
-       while(slow!=fast){
-           slow = slow.next;
-           prev = fast;
-           fast = fast.next;
-       }
-       //Step 3 : previous node next will be null..
-       prev.next = null;
+     //Step 1 : detect the loop or cycle..
+     Node slow = head;
+     Node fast = head;
+     Node prev = null;
+     while(fast!= null && fast.next!= null){
+         prev = slow;
+         slow = slow.next;
+         fast = fast.next.next;
+         if(slow == fast){
+             break;
+         }
+     }
+     
+    if(slow!= fast)
+      return;
+      //Step 2:Finding the meeting point.
+    slow = head;
+    while(slow!= fast){
+        slow = slow.next;
+        prev = fast;
+        fast = fast.next;
+    }
+    //Step 3: Prev next will be null
+     prev.next = null;
     }
 }
