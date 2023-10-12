@@ -16,8 +16,8 @@ public class Solution {
         while(fast!= null && fast.next!= null){
             slow = slow.next;
             fast = fast.next.next;
-            if(slow == fast){
-                slow = head;
+            if(slow == fast){ //when my slow and fast are equal then 
+                slow = head;  // slow move to the head.
                 while(slow!=fast){
                     slow = slow.next;
                     fast = fast.next;
