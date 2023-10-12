@@ -11,6 +11,7 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        /*
         //Step 1 : Calculate the length of two linklist.
         int len1 = getLen(headA);
         int len2 = getLen(headB);
@@ -36,6 +37,26 @@ public class Solution {
         while(tem!=null){
             tem = tem.next;
             len++;
-        }return len;
+        }return len;*/
+        
+        
+        /* Approach 2 */
+        //base case.
+        if(headA == null || headB == null)return null;
+        ListNode tem1 = headA;
+        ListNode tem2 = headB;
+        while(tem1!= tem2){
+            if(tem1 == null){
+                tem1 = headB;
+            }else{
+                tem1 = tem1.next;
+            }
+            if(tem2 == null){
+                tem2 = headA;
+            }else{
+                tem2 = tem2.next;
+            }
+        }return tem1;
+
     }
 }
