@@ -87,6 +87,7 @@ class GfG
 {
     public static Node rearrange(Node root)
     {
+        //Same question as "REORDER LIST in leetcode.."
         //Step 1 :Findout Middle.
         Node head = root;
         Node slow = head;
