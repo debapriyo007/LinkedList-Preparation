@@ -77,6 +77,8 @@ class Node {
 
 */
 
+//I been that Nigga !! God damn !! it..
+
 class Solution{
     //Function to add two numbers represented by linked list.
     static Node addTwoLists(Node first, Node second){
