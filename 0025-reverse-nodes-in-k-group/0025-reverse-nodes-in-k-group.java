@@ -10,34 +10,35 @@
  */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        if(head == null)return null;
-        //Fist write down the reverse code.
-        ListNode curr = head;
-        ListNode prev = null;
-        ListNode next = null;
-        int count = k;
-        while(curr!= null && count > 0){
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr= next;
-            count--;
-        }
-        if(curr == null && count > 0){
-            curr = prev;
-            prev = null;
-            next = null;
-            while(curr!=null){
-                next = curr.next;
-                curr.next = prev;
-                prev = curr;
-                curr= next;
-            }
-        }
-        if(count >0){
-            return prev;
-        }else{head.next = reverseKGroup(next, k);}
         
-        return prev;
+        //Fist I have to create a dummy node.
+        ListNode dummy = new ListNode(-1);
+        //attached the dummynode with the main ll.
+        dummy.next = head;
+        //Take 3 pointer on dummy node.
+        ListNode prev = dummy;
+        ListNode curr = dummy;
+        ListNode next = dummy;
+        
+        //Now, claculate the size of the ll.
+        int size = 0;
+        while(curr.next!= null){ //why curr.next ? --> curr pointer on dummynode.
+            curr = curr.next;
+            size++;
+        }
+        
+        while(size>=k){
+            curr = prev.next; //intilize my curr poniter.
+            next = curr.next;//intilize my next poniter.
+            for(int i = 1;i<k;i++){  //this loop will run two time coz i want to remove two links.that's why i will be start from 1.
+                curr.next = next.next;
+                next.next = prev.next;
+                prev.next = next;
+                next = curr.next;
+            }
+            prev = curr;
+            size-=k;
+        }
+        return dummy.next;
     }
 }
