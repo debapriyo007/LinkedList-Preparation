@@ -9,42 +9,52 @@
  * }
  */
 class Solution {
-    /* THIS QUESTION IS ALSO BE KNOWN AS -> "ZIGZAG" */
-    
     public void reorderList(ListNode head) {
-        //Step 1 :Findout Middle.
+        
+        ListNode mid = Middle(head);
+        ListNode secondHalf =Revrse(mid.next);
+        mid.next = null;
+        
+        ListNode LeftHead = head;
+        ListNode rightHead = secondHalf;
+        ListNode tem1 = null;
+        ListNode tem2 = null;
+        
+        while(LeftHead!= null && rightHead!= null){
+            tem1 = LeftHead.next;
+            LeftHead.next = rightHead;
+            tem2 = rightHead.next;
+            rightHead.next = tem1;
+            
+            LeftHead = tem1;
+            rightHead = tem2;
+            
+        }
+        
+        
+    }
+    //calculate the middle of the ll
+    public static ListNode Middle(ListNode head){
         ListNode slow = head;
         ListNode fast = head;
-        while(fast!= null && fast.next!=null){
+        while(fast!= null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
-        }ListNode mid = slow;
-        
-        //step 2: Revrse the second half.
-        //my seecond half head node is (mid.next).
-        ListNode curr = mid.next;
-        mid.next = null;
+        }
+        return slow;
+    }
+    
+    //Reverse function.
+    public static ListNode Revrse(ListNode head){
+        ListNode curr = head;
         ListNode prev = null;
         ListNode next;
         while(curr!= null){
             next = curr.next;
             curr.next = prev;
             prev = curr;
-            curr = next;
+            curr= next;
         }
-        //Step 3 : Merge two ll.
-        //Left half head is
-        ListNode lefHalf_Head = head;
-        ListNode rightHalf_Head = prev; //why prev cause i revserse the ll so,my reverse ll head is always prev.
-        ListNode tem1 , tem2;
-        while(lefHalf_Head!= null && rightHalf_Head!= null){
-            tem1 = lefHalf_Head.next;
-            lefHalf_Head.next = rightHalf_Head;
-            tem2 = rightHalf_Head.next;
-            rightHalf_Head.next = tem1;
-            
-            lefHalf_Head = tem1;
-            rightHalf_Head = tem2;
-            }
-        }
+        return prev;
+    }
 }
