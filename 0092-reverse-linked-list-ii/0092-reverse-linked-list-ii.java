@@ -13,20 +13,19 @@ class Solution {
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
         ListNode tem = dummy;
-        int i = 1;
-        while(i<left){
-            tem = tem.next;
-            i++;
+        //move my tem one node before left .
+        for(int i = 0;i<left-1;i++)tem = tem.next;
+        ListNode st = tem.next;
+        ListNode stNext = st.next;
+
+        for(int i = 0 ;i<right-left ;i++){ // as given left = 2 
+            st.next = stNext.next;         //          right = 4
+            stNext.next = tem.next; //The loop run 2 times.
+            tem.next = stNext;
+            stNext = st.next;
         }
-        ListNode curr = tem.next;
-        ListNode next = curr.next;
-        
-        for(int j = 0;j<right-left;j++){
-            curr.next = next.next;
-            next.next = tem.next;
-            tem.next = next;
-            next = curr.next;
-        }
+    // 1st iteration: dummy->1 - 3 - 2 - 4 - 5; pre = 1, start = 2, then = 4
+    // 2nd iteration: dummy->1 - 4 - 3 - 2 - 5; pre = 1, start = 2, then = 5 (finish)
         return dummy.next;
     }
 }
